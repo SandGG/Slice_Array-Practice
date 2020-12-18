@@ -9,18 +9,24 @@ var (
 		n int
 		s string
 	}{
-		{0, "odd"},
-		{1, "even"},
-		{2, "odd"},
-		{3, "even"},
-		{4, "odd"},
+		{n: 0, s: "odd"},
+		{n: 1, s: "even"},
+		{n: 2, s: "odd"},
+		{n: 3, s: "even"},
+		{n: 4, s: "odd"},
 	}
 
-	slice  = array[5:8]
-	start  = array[:6] //same cap
-	end    = array[7:] // change cap
-	all    = array[:]
-	extend = start[3:]
+	slice  []int = array[5:8]
+	start  []int = array[:6] //same cap
+	end    []int = array[7:] // change cap
+	all    []int = array[:]
+	extend []int = start[3:]
+
+	a = make([]int, 5)
+	b = make([]int, 0, 5) //type, len, cap
+
+	c []int = b[:2]
+	d []int = c[2:5]
 )
 
 func main() {
@@ -28,26 +34,20 @@ func main() {
 	fmt.Println(array)
 	fmt.Println(slice)
 
-	printSlice("Start = ", start)
-	printSlice("End = ", end)
-	printSlice("All = ", all)
-	printSlice("Extend = ", extend)
+	printSlice("Start =", start)
+	printSlice("End =", end)
+	printSlice("All =", all)
+	printSlice("Extend =", extend)
 
-	a := make([]int, 5)
-	b := make([]int, 0, 5) //type, len, cap
-
-	c := b[:2]
-	d := c[2:5]
-
-	printSliceMake("a = ", a)
-	printSliceMake("b = ", b)
-	printSliceMake("c = ", c)
-	printSliceMake("d = ", d)
+	printSliceMake("a =", a)
+	printSliceMake("b =", b)
+	printSliceMake("c =", c)
+	printSliceMake("d =", d)
 
 }
 
 func printSlice(sliceName string, v []int) {
-	fmt.Println(sliceName, "len = ", len(v), "cap = ", cap(v))
+	fmt.Println(sliceName, v, "len = ", len(v), "cap = ", cap(v))
 }
 
 func printSliceMake(sliceName string, v []int) {
